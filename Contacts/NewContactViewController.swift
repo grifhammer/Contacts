@@ -23,16 +23,18 @@ class NewContactViewController: UIViewController {
     @IBAction func saveButtonTouched(sender: AnyObject) {
         if self.delegate != nil {
             
-            let newContact = Contact()
+            let newContact = DataManager.sharedManager.createContact()
             
             newContact.firstName = self.firstNameTextField.text
             newContact.lastName = self.lastNameTextField.text
             newContact.phoneNumber = self.phoneNumberTextField.text
-            newContact.streetAddress = self.streetAddressTextField.text
-            newContact.city = self.cityTextField.text
-            newContact.state = self.stateTextField.text
-            newContact.zipCode = self.zipCodeTextField.text
+            newContact.address!.street = self.streetAddressTextField.text
+            newContact.address!.city = self.cityTextField.text
+            newContact.address!.state = self.stateTextField.text
+            newContact.address!.zipCode = self.zipCodeTextField.text
             
+            
+            DataManager.sharedManager.save()
             self.delegate!.didCreateNewContact(newContact)
             
         }

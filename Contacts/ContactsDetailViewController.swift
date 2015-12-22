@@ -24,10 +24,10 @@ class ContactsDetailViewController: UIViewController {
         self.firstName.text = selectedContact.firstName
         self.lastName.text = selectedContact.lastName
         self.phoneNumber.text = selectedContact.phoneNumber
-        self.streetAddress.text = selectedContact.streetAddress
-        self.city.text = selectedContact.city
-        self.state.text = selectedContact.state
-        self.zipCode.text = selectedContact.zipCode
+        self.streetAddress.text = self.selectedContact.address?.street
+        self.city.text = self.selectedContact.address?.city
+        self.state.text = self.selectedContact.address?.state
+        self.zipCode.text = self.selectedContact.address?.zipCode
     }
     
     

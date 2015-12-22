@@ -26,7 +26,7 @@ UITableViewDataSource, UITableViewDelegate, NewContactDelegate {
             for contact in newContacts {
                 self.contacts?.append(contact)
             }
-            DataManager.sharedManager.saveContacts(self.contacts!)
+            
         }
     }
     
@@ -97,8 +97,6 @@ UITableViewDataSource, UITableViewDelegate, NewContactDelegate {
     func didCreateNewContact(newContact: Contact) {
         
         self.contacts?.append(newContact)
-        
-        DataManager.sharedManager.saveContacts(self.contacts!)
         
         self.tableView.reloadData()
     }

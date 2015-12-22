@@ -9,6 +9,7 @@
 import Foundation
 
 struct WebServiceManager {
+    
     func fetchContacts(callback : ([Contact]) -> Void) {
         
         let url = NSURL(string: "http://jsonplaceholder.typicode.com/users")
@@ -21,12 +22,15 @@ struct WebServiceManager {
                 do {
                     if let jsonArray : [[String : AnyObject]] = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as? [[String:AnyObject]]{
                         //Use the jsonArray here
-                        for jsonDict in jsonArray {
-                            //Use jsonDict here
-                            let newContact = self.parseContact(jsonDict)
-                            contactList.append(newContact)
-                        }
-                        callback(contactList)
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            for jsonDict in jsonArray {
+                                //Use jsonDict here
+                                let newContact = self.parseContact(jsonDict)
+                                contactList.append(newContact)
+                            }
+                            callback(contactList)
+
+                        })
                     }
                 }
                 catch {
@@ -42,16 +46,17 @@ struct WebServiceManager {
         task.resume()
     }
     private func parseContact(jsonDict : [String:AnyObject]) -> Contact{
-        let newContact = Contact()
+        let newContact = DataManager.sharedManager.createContact()
         
         newContact.phoneNumber = jsonDict["phone"] as? String
         
         if let addressDict = jsonDict["address"] as? [String : AnyObject]
         {
             // Use the properties of addressDict here
-            newContact.streetAddress = addressDict["street"] as? String
-            newContact.city = addressDict["city"] as? String
-            newContact.zipCode = addressDict["zipcode"] as? String
+            
+            newContact.address!.street = addressDict["street"] as? String
+            newContact.address!.city = addressDict["city"] as? String
+            newContact.address!.zipCode = addressDict["zipcode"] as? String
 
         }
         if let fullName = jsonDict["name"] as? String{
@@ -67,6 +72,8 @@ struct WebServiceManager {
                 newContact.lastName = "Joel"
             }
         }
+        
+        DataManager.sharedManager.save()
         return newContact
     }
 }
