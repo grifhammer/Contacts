@@ -49,7 +49,9 @@ struct WebServiceManager {
         let newContact = DataManager.sharedManager.createContact()
         
         newContact.phoneNumber = jsonDict["phone"] as? String
-        
+        if let contactId = jsonDict["id"] as? NSNumber {
+            newContact.contactId = contactId
+        }
         if let addressDict = jsonDict["address"] as? [String : AnyObject]
         {
             // Use the properties of addressDict here

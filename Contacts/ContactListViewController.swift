@@ -8,8 +8,7 @@
 
 import UIKit
 
-class ContactListViewController: UIViewController,
-UITableViewDataSource, UITableViewDelegate, NewContactDelegate {
+class ContactListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NewContactDelegate {
     
     
     var contacts : [Contact]?
@@ -99,6 +98,10 @@ UITableViewDataSource, UITableViewDelegate, NewContactDelegate {
         self.contacts?.append(newContact)
         
         self.tableView.reloadData()
+    }
+    
+    func didUpdateContact(contact: Contact) {
+        //Intentionally left blank
     }
     
     /*

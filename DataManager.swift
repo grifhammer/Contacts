@@ -47,6 +47,10 @@ struct DataManager {
         
         contact?.address = address
         
+        let uuid = NSUUID()
+        
+        contact?.contactId = Int(uuid.UUIDString)
+        
         return contact!
     }
     
@@ -59,5 +63,25 @@ struct DataManager {
             print("Failed to save context: \(error)")
             
         }
+    }
+    
+    func getContact(contactId contactId: Int) -> Contact? {
+        //Code goes here
+        let query = NSFetchRequest(entityName: "Contact")
+        let filter = NSPredicate(format: "contactId = %@", String(contactId))
+        
+        query.predicate = filter
+        
+        do {
+            if let results = try self.coreDataManager.context.executeFetchRequest(query) as? [Contact] {
+                if results.count > 0 {
+                    return results[0]
+                }
+            }
+        }
+        catch {
+            print("Failed to query for contact: \(error)")
+        }
+        return nil
     }
 }

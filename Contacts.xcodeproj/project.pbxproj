@@ -83,17 +83,17 @@
 			isa = PBXGroup;
 			children = (
 				857018091C03E46B00E6FC6E /* ContactTableViewCell.swift */,
-				8518EFB21BF1672F00B5AAA0 /* DataManager.swift */,
 				8518EF9A1BF164B900B5AAA0 /* AppDelegate.swift */,
 				8518EF9E1BF164B900B5AAA0 /* Main.storyboard */,
 				851602101BF418C0009F54AF /* NewContactDelegate.swift */,
 				8516020E1BF415C1009F54AF /* NewContactViewController.swift */,
 				8518EFB41BF16B4100B5AAA0 /* ContactsDetailViewController.swift */,
 				8518EFAC1BF165BB00B5AAA0 /* ContactListViewController.swift */,
-				857AEF6E1C28CC7E00F4239C /* Contacts.xcdatamodeld */,
+				8518EFB21BF1672F00B5AAA0 /* DataManager.swift */,
 				85984E401BFAAA6E00623227 /* WebServiceManager.swift */,
 				857AEF791C28D09900F4239C /* CoreDataManager.swift */,
 				8518EFA11BF164B900B5AAA0 /* Assets.xcassets */,
+				857AEF6E1C28CC7E00F4239C /* Contacts.xcdatamodeld */,
 				8518EFA31BF164B900B5AAA0 /* LaunchScreen.storyboard */,
 				8518EFA61BF164B900B5AAA0 /* Info.plist */,
 			);

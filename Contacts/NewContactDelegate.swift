@@ -13,5 +13,7 @@ protocol NewContactDelegate : class {
     
     func didCreateNewContact(newContact:Contact)
     
+    func didUpdateContact(contact: Contact)
+    
     
 }

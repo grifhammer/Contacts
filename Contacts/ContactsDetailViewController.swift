@@ -8,28 +8,57 @@
 
 import UIKit
 
-class ContactsDetailViewController: UIViewController {
+class ContactsDetailViewController: UIViewController, NewContactDelegate {
 
-    @IBOutlet weak var firstName: UILabel!
-    @IBOutlet weak var lastName: UILabel!
-    @IBOutlet weak var phoneNumber: UILabel!
-    @IBOutlet weak var streetAddress: UILabel!
-    @IBOutlet weak var city: UILabel!
-    @IBOutlet weak var state: UILabel!
-    @IBOutlet weak var zipCode: UILabel!
+    @IBOutlet weak var firstNameLabel: UILabel!
+    @IBOutlet weak var lastNameLabel: UILabel!
+    @IBOutlet weak var phoneNumberLabel: UILabel!
+    @IBOutlet weak var streetAddressLabel: UILabel!
+    @IBOutlet weak var cityLabel: UILabel!
+    @IBOutlet weak var stateLabel: UILabel!
+    @IBOutlet weak var zipCodeLabel: UILabel!
     
     var selectedContact : Contact!
     
     override func viewDidLoad() {
-        self.firstName.text = selectedContact.firstName
-        self.lastName.text = selectedContact.lastName
-        self.phoneNumber.text = selectedContact.phoneNumber
-        self.streetAddress.text = self.selectedContact.address?.street
-        self.city.text = self.selectedContact.address?.city
-        self.state.text = self.selectedContact.address?.state
-        self.zipCode.text = self.selectedContact.address?.zipCode
+        self.firstNameLabel.text = selectedContact.firstName
+        self.lastNameLabel.text = selectedContact.lastName
+        self.phoneNumberLabel.text = selectedContact.phoneNumber
+        self.streetAddressLabel.text = self.selectedContact.address?.street
+        self.cityLabel.text = self.selectedContact.address?.city
+        self.stateLabel.text = self.selectedContact.address?.state
+        self.zipCodeLabel.text = self.selectedContact.address?.zipCode
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "EditContactSegue" {
+            
+            if let vc = segue.destinationViewController as? NewContactViewController {
+                vc.delegate = self
+                vc.editedContact = selectedContact
+            }
+        }
+    }
+    
+    func updateLabels() {
+        self.firstNameLabel.text = self.selectedContact?.firstName
+        self.lastNameLabel.text = self.selectedContact?.lastName
+        self.phoneNumberLabel.text = self.selectedContact?.phoneNumber
+        self.streetAddressLabel.text = self.selectedContact?.address?.street
+        self.cityLabel.text = self.selectedContact?.address?.city
+        self.stateLabel.text = self.selectedContact?.address?.state
+        self.zipCodeLabel.text = self.selectedContact?.address?.zipCode
+
     }
     
     
+    func didUpdateContact(contact: Contact) {
+        self.selectedContact = contact
+        self.updateLabels()
+    }
+    
+    func didCreateNewContact(newContact: Contact) {
+        //Intentionally left blank
+    }
     
 }
