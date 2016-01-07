@@ -35,7 +35,7 @@ class ContactsDetailViewController: UIViewController, NewContactDelegate {
             
             if let vc = segue.destinationViewController as? NewContactViewController {
                 vc.delegate = self
-                vc.editedContact = selectedContact
+                vc.editContactId = selectedContact.contactId
             }
         }
     }

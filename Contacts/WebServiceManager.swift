@@ -50,7 +50,7 @@ struct WebServiceManager {
         
         newContact.phoneNumber = jsonDict["phone"] as? String
         if let contactId = jsonDict["id"] as? NSNumber {
-            newContact.contactId = contactId
+            newContact.contactId = String(contactId)
         }
         if let addressDict = jsonDict["address"] as? [String : AnyObject]
         {

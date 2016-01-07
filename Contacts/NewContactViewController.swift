@@ -19,8 +19,8 @@ class NewContactViewController: UIViewController {
     @IBOutlet weak var zipCodeTextField: UITextField!
     
     var delegate : NewContactDelegate?
-
-    var editedContact: Contact?
+    var editContactId : String?
+    private var editedContact: Contact?
     
     func updateTextFields() {
         self.firstNameTextField.text = self.editedContact?.firstName
@@ -75,8 +75,8 @@ class NewContactViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let contactId = self.editedContact?.contactId {
-            self.editedContact = DataManager.sharedManager.getContact(contactId: Int(contactId))
+        if let contactId = self.editContactId {
+            self.editedContact = DataManager.sharedManager.getContact(contactId: contactId)
             if self.editedContact != nil {
                 self.updateTextFields()
             }

@@ -49,7 +49,7 @@ struct DataManager {
         
         let uuid = NSUUID()
         
-        contact?.contactId = Int(uuid.UUIDString)
+        contact?.contactId = uuid.UUIDString
         
         return contact!
     }
@@ -65,7 +65,7 @@ struct DataManager {
         }
     }
     
-    func getContact(contactId contactId: Int) -> Contact? {
+    func getContact(contactId contactId: String) -> Contact? {
         //Code goes here
         let query = NSFetchRequest(entityName: "Contact")
         let filter = NSPredicate(format: "contactId = %@", String(contactId))
@@ -73,10 +73,8 @@ struct DataManager {
         query.predicate = filter
         
         do {
-            if let results = try self.coreDataManager.context.executeFetchRequest(query) as? [Contact] {
-                if results.count > 0 {
-                    return results[0]
-                }
+            if let results = try self.coreDataManager.context.executeFetchRequest(query) as? [Contact] where results.count > 0 {
+                return results[0]
             }
         }
         catch {
